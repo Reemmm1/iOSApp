@@ -11,10 +11,24 @@ struct ShowDetailView: View {
     let show: TVShow
     
     var body: some View {
-        Text(show.name)
+        ScrollView {
+            VStack(spacing: 16) {
+                if let imageUrl = show.image?.original {
+                    let url = URL(string: imageUrl)
+                    
+                    AsyncImage(url: url) {
+                        image in image.resizable().scaledToFit()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                }
+                
+                if let summary = show.cleanedSummary {
+                    Text(summary)
+                }
+            }
+            .padding()
+        }
+        .navigationTitle(show.name)
     }
 }
-
-//#Preview {
-//    ShowDetailView()
-//}

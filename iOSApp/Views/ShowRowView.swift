@@ -32,7 +32,3 @@ struct ShowRowView: View {
         }
     }
 }
-
-//#Preview {
-//    ShowRowView()
-//}

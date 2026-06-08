@@ -19,3 +19,11 @@ struct ShowImage: Codable {
     let original: String?
 }
 
+extension TVShow {
+    var cleanedSummary: String? {
+        summary?
+            .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+        ?? ""
+    }
+}
+
