@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct TVShow: Codable, Identifiable {
+struct TVShow: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let summary: String?
     let image: ShowImage?
 }
 
-struct ShowImage: Codable {
+struct ShowImage: Codable, Hashable {
     let medium: String?
     let original: String?
 }

@@ -10,25 +10,30 @@ import Combine
 
 @MainActor
 final class ShowListViewModel: ObservableObject {
-    @Published var shows: [TVShow] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+    enum State {
+        case loading
+        case loaded([TVShow])
+        case error(String)
+    }
     
-    private let service: TVMazeService
-    init(service: TVMazeService) {
+    @Published private(set) var state: State = .loading
+    
+    private let service: APIService
+    init(service: APIService) {
         self.service = service
     }
     
     func loadShows() async {
-        isLoading = true
-        errorMessage = nil
+        state = .loading
         
         do {
-            let fetchedShows = try await service.fetchShows()
-            self.shows = fetchedShows
+            let shows = try await service.fetch(
+                from: "https://api.tvmaze.com/shows",
+                as: [TVShow].self
+            )
+            state = .loaded(shows)
         } catch {
-            self.errorMessage = error.localizedDescription
+            state = .error(error.localizedDescription)
         }
-        isLoading = false
     }
 }
