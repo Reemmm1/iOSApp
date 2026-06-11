@@ -18,8 +18,8 @@ final class ShowListViewModel: ObservableObject {
     
     @Published private(set) var state: State = .loading
     
-    private let service: APIService
-    init(service: APIService) {
+    private let service: APIServiceProtocol
+    init(service: APIServiceProtocol) {
         self.service = service
     }
     

@@ -14,7 +14,7 @@ struct TVShow: Codable, Identifiable, Hashable {
     let image: ShowImage?
 }
 
-struct ShowImage: Codable, Hashable {
+struct ShowImage: Codable, Hashable{
     let medium: String?
     let original: String?
 }

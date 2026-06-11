@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class APIService {
+final class APIService: APIServiceProtocol {
     
     func fetch<T: Decodable>(
         from urlString: String,
